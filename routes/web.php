@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\PageController;
+
+Route::get('/', [PageController::class, 'main']);
+Route::get('/home', [PageController::class, 'main']);
+Route::get('/details', [PageController::class, 'details']);
+Route::get('/contact', [PageController::class, 'contact']);
+Route::get('/offers', [PageController::class, 'offers']);
