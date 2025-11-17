@@ -1,9 +1,17 @@
 @extends('layouts.app')
 
-@section('title', 'Detalles del producto')
+@section('title', isset($product) ? $product->name : 'Detalles del producto')
 @section('header', 'Detalles del Producto')
 @section('content')
-    <h2>Detalles del producto</h2>
-    <p>Aquí podrás ver la información detallada de cada producto seleccionado, incluyendo características, precio y disponibilidad.</p>
-    <a href="/" style="color:#3182ce;">Volver al inicio</a>
+    @if(isset($product))
+        <h2>{{ $product->name }}</h2>
+        <p><strong>Categoría:</strong> {{ $product->category }}</p>
+        <p><strong>Precio:</strong> € {{ number_format($product->price, 2) }}</p>
+        <h3>Descripción</h3>
+        <p>{{ $product->description }}</p>
+        <a href="/" style="color:#3182ce;">Volver al inicio</a>
+    @else
+        <p>Producto no encontrado.</p>
+        <a href="/" style="color:#3182ce;">Volver al inicio</a>
+    @endif
 @endsection
