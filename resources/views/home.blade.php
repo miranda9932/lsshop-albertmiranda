@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Inicio')
-@section('header', 'Bienvenido a la Tienda Online')
+@section('title', 'lsshop')
+@section('header', 'LSSHOP')
 @section('content')
     <h2>Catálogo</h2>
 
