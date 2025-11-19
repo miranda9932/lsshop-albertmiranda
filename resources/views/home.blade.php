@@ -33,6 +33,10 @@
         </div>
     </form>
 
+    <div style="margin-bottom:1rem;">
+        <a href="/products/create{{ request()->getQueryString() ? '?'.request()->getQueryString() : '' }}" style="background:#3182ce;color:#fff;padding:0.5rem 1rem;border-radius:4px;text-decoration:none;">Nuevo producto</a>
+    </div>
+
     <table style="width:100%;border-collapse:collapse;">
         <thead>
             <tr style="background:#f1f5f9;text-align:left;">
@@ -48,7 +52,9 @@
                     <td style="padding:0.5rem;border:1px solid #e2e8f0;">{{ $product->name }}</td>
                     <td style="padding:0.5rem;border:1px solid #e2e8f0;">{{ $product->category }}</td>
                     <td style="padding:0.5rem;border:1px solid #e2e8f0;">€ {{ number_format($product->price, 2) }}</td>
-                    <td style="padding:0.5rem;border:1px solid #e2e8f0;"><a href="/details/{{ $product->id }}" style="color:#3182ce;">Ver detalles</a></td>
+                    <td style="padding:0.5rem;border:1px solid #e2e8f0;">
+                        <a href="/details/{{ $product->id }}{{ request()->getQueryString() ? '?'.request()->getQueryString() : '' }}" style="color:#3182ce;">Ver detalles</a>
+                    </td>
                 </tr>
             @empty
                 <tr>

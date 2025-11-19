@@ -49,6 +49,68 @@ class PageController extends Controller
         return view('details', compact('product'));
     }
 
+    /**
+     * Show form to create a product.
+     */
+    public function create(Request $request)
+    {
+        // Keep current filters to redirect back after creation if provided
+        $filters = $request->only(['category', 'order_by_price', 'price_dir']);
+        return view('products.create', compact('filters'));
+    }
+
+    /**
+     * Store new product.
+     */
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'category' => 'nullable|string|max:100',
+            'price' => 'required|numeric|min:0',
+            'description' => 'nullable|string',
+        ]);
+
+        Product::create($data);
+
+        // Redirect back to home with filters if any
+        $query = $request->only(['category', 'order_by_price', 'price_dir']);
+        $qs = http_build_query($query);
+        return redirect('/' . ($qs ? '?'.$qs : ''));
+    }
+
+    /**
+     * Update a product.
+     */
+    public function update(Request $request, Product $product)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'category' => 'nullable|string|max:100',
+            'price' => 'required|numeric|min:0',
+            'description' => 'nullable|string',
+        ]);
+
+        $product->update($data);
+
+        // Redirect back to home with preserved filters
+        $query = $request->only(['category', 'order_by_price', 'price_dir']);
+        $qs = http_build_query($query);
+        return redirect('/' . ($qs ? '?'.$qs : ''));
+    }
+
+    /**
+     * Destroy a product.
+     */
+    public function destroy(Request $request, Product $product)
+    {
+        $product->delete();
+
+        $query = $request->only(['category', 'order_by_price', 'price_dir']);
+        $qs = http_build_query($query);
+        return redirect('/' . ($qs ? '?'.$qs : ''));
+    }
+
     public function contact()
     {
         return view('contact');
