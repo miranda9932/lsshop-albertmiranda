@@ -42,7 +42,7 @@ class PageController extends Controller
     }
 
     /**
-     * Show details for a specific product.
+     * Mostrar detalles de un producto específico.
      */
     public function details(Product $product)
     {
@@ -50,17 +50,17 @@ class PageController extends Controller
     }
 
     /**
-     * Show form to create a product.
+     * Mostrar formulario para crear un producto.
      */
     public function create(Request $request)
     {
-        // Keep current filters to redirect back after creation if provided
+        // Mantener los filtros actuales para redirigir de vuelta tras la creación si se proporcionan
         $filters = $request->only(['category', 'order_by_price', 'price_dir']);
         return view('products.create', compact('filters'));
     }
 
     /**
-     * Store new product.
+     * Guardar nuevo producto.
      */
     public function store(Request $request)
     {
@@ -73,14 +73,14 @@ class PageController extends Controller
 
         Product::create($data);
 
-        // Redirect back to home with filters if any
+        // Redirigir de vuelta al inicio con filtros si los hay
         $query = $request->only(['category', 'order_by_price', 'price_dir']);
         $qs = http_build_query($query);
         return redirect('/' . ($qs ? '?'.$qs : ''));
     }
 
     /**
-     * Update a product.
+     * Actualizar un producto.
      */
     public function update(Request $request, Product $product)
     {
@@ -93,19 +93,20 @@ class PageController extends Controller
 
         $product->update($data);
 
-        // Redirect back to home with preserved filters
+        // Redirigir de vuelta al inicio preservando los filtros
         $query = $request->only(['category', 'order_by_price', 'price_dir']);
         $qs = http_build_query($query);
         return redirect('/' . ($qs ? '?'.$qs : ''));
     }
 
     /**
-     * Destroy a product.
+     * Eliminar un producto.
      */
     public function destroy(Request $request, Product $product)
     {
         $product->delete();
 
+        // Redirigir de vuelta al inicio preservando los filtros
         $query = $request->only(['category', 'order_by_price', 'price_dir']);
         $qs = http_build_query($query);
         return redirect('/' . ($qs ? '?'.$qs : ''));
