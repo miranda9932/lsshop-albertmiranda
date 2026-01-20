@@ -1,5 +1,7 @@
 # lsshop-albertmiranda
 
+# Tienda web estilo amazon 
+
 Proyecto web desarrollado con **Laravel (PHP)** como práctica académica. Incluye estructura MVC completa (rutas, controladores, vistas y acceso a datos).
 
 ## Stack
